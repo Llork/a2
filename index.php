@@ -25,7 +25,9 @@
     <label><input type='radio' name='case' value='lower' <?=$radio1?> > Convert to lower case &#160;&#160;</label>
     <label><input type='radio' name='case' value='upper' <?=$radio2?> > Convert to upper case &#160;&#160;</label>
     <label><input type='radio' name='case' value='keep'  <?=$radio3?> > Leave as is</label>
-</fieldset><br><br>
+</fieldset><br>
+
+<label><input type='checkbox' name='removeBlanks' value='yes' <?=$checkbox1?> > Remove blanks from output</label><br><br>
 
 <input type="submit"><br><br>
 

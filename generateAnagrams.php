@@ -8,12 +8,13 @@ $form = new DWA\Form($_GET);
 
 if($form->isSubmitted()) {
 
-    $phraseToAnagram = $form->get('phraseToAnagram', $default = '');
-    $sanitizedPhrase = sanitize($phraseToAnagram);
-    $arrayOfInputString = str_split($sanitizedPhrase);
-    shuffle($arrayOfInputString);
-    $outputString = implode($arrayOfInputString);
+    $phraseToAnagram = $form->get('phraseToAnagram', $default = ''); // get phrase to anagram from user-submitted form
+    $sanitizedPhrase = sanitize($phraseToAnagram); // sanitize input
+    $arrayOfInputString = str_split($sanitizedPhrase); // convert input to an array
+    shuffle($arrayOfInputString); // shuffle the array, thus creating an anagram
+    $outputString = implode($arrayOfInputString); // convert array back to a string
 
+    // Convert case or leave case as is, depending on what user chose:
     if($_GET['case']=='lower') {
         $outputString = strtolower($outputString);
         $radio1='checked'; $radio2=''; $radio3=''; }
@@ -23,12 +24,27 @@ if($form->isSubmitted()) {
     else if($_GET['case']=='keep') { // keep case as is
               $radio1=''; $radio2=''; $radio3='checked'; }
 
+    // Strip blanks from output if user wants this done:
+    if(isset($_GET['removeBlanks'])) {
+        if($_GET['removeBlanks']=='yes') { // blanks should be removed
+            $checkbox1 = 'checked';
+            $outputString = str_replace(' ', '', $outputString);
+        }
+        else {
+            $checkbox1='';
+        }
+    }
+    else {
+            $checkbox1='';
+    }
+
     $shuffledString = "Anagram: " . $outputString;
 }
 else { // Form was NOT submitted
 
     $shuffledString = " ";
     $radio1='checked'; $radio2=''; $radio3='';
+    $checkbox1='checked';
 }
 
 # closing PHP tag intentionally omitted
