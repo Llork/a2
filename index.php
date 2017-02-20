@@ -35,6 +35,11 @@
 
 <div class="output_area">
     <?=$shuffledString?>
+    <?php if($errors): ?>
+        <?php foreach($errors as $error): ?>
+            <?=$error?><br>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 
 </div>

@@ -8,6 +8,8 @@ $form = new DWA\Form($_GET);
 
 if($form->isSubmitted()) {
 
+    $errors = $form->validate(['phraseToAnagram' => 'required|alpha']); // validate text field
+
     $phraseToAnagram = $form->get('phraseToAnagram', $default = ''); // get phrase to anagram from user-submitted form
     $sanitizedPhrase = sanitize($phraseToAnagram); // sanitize input
     $arrayOfInputString = str_split($sanitizedPhrase); // convert input to an array
@@ -39,12 +41,16 @@ if($form->isSubmitted()) {
     }
 
     $shuffledString = "Anagram: " . $outputString;
+
+    if($errors) { $shuffledString = ''; } // if error in text field, don't show an anagram, but retain user's form choices.
+
 }
 else { // Form was NOT submitted
 
     $shuffledString = " ";
-    $radio1='checked'; $radio2=''; $radio3='';
-    $checkbox1='checked';
+    $radio1 = 'checked'; $radio2=''; $radio3='';
+    $checkbox1 = 'checked';
+    $errors = '';
 }
 
 # closing PHP tag intentionally omitted
