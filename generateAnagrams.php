@@ -19,12 +19,21 @@ if($form->isSubmitted()) {
     // Convert case or leave case as is, depending on what user chose:
     if($_GET['case']=='lower') {
         $outputString = strtolower($outputString);
-        $radio1='checked'; $radio2=''; $radio3=''; }
+        $radio1='checked';
+        $radio2='';
+        $radio3='';
+    }
     else if($_GET['case']=='upper') {
         $outputString = strtoupper($outputString);
-        $radio1=''; $radio2='checked'; $radio3=''; }
+        $radio1='';
+        $radio2='checked';
+        $radio3='';
+    }
     else if($_GET['case']=='keep') { // keep case as is
-              $radio1=''; $radio2=''; $radio3='checked'; }
+        $radio1='';
+        $radio2='';
+        $radio3='checked';
+    }
 
     // Strip blanks from output if user wants this done:
     if(isset($_GET['removeBlanks'])) {
@@ -37,18 +46,22 @@ if($form->isSubmitted()) {
         }
     }
     else {
-            $checkbox1='';
+        $checkbox1='';
     }
 
     $shuffledString = "Anagram: " . $outputString;
 
-    if($errors) { $shuffledString = ''; } // if error in text field, don't show an anagram, but retain user's form choices.
+    if($errors) {
+        $shuffledString = ''; 
+    } // if error in text field, don't show an anagram, but retain user's form choices.
 
 }
 else { // Form was NOT submitted
 
     $shuffledString = " ";
-    $radio1 = 'checked'; $radio2=''; $radio3='';
+    $radio1 = 'checked';
+    $radio2='';
+    $radio3='';
     $checkbox1 = 'checked';
     $errors = '';
 }
